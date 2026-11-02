@@ -36,7 +36,7 @@ export const workouts: Workout[] = [
     ],
   },
   {
-    id: 1,
+    id: 2,
     name: "Legs",
     duration: 3600,
     exercise: [
@@ -70,7 +70,7 @@ export const workouts: Workout[] = [
     ],
   },
   {
-    id: 1,
+    id: 3,
     name: "Pull day",
     duration: 3600,
     exercise: [
@@ -78,7 +78,7 @@ export const workouts: Workout[] = [
         id: 1,
         name: "Pull ups",
         sets: [
-          { reps: 10, weight: 20},
+          { reps: 10, weight: 20 },
           { reps: 9, weight: 10 },
           { reps: 10, weight: 5 },
         ],
@@ -104,7 +104,7 @@ export const workouts: Workout[] = [
     ],
   },
   {
-    id: 1,
+    id: 4,
     name: "Arm day",
     duration: 3600,
     exercise: [
@@ -138,7 +138,7 @@ export const workouts: Workout[] = [
     ],
   },
   {
-    id: 1,
+    id: 5,
     name: "Shoulder day",
     duration: 3600,
     exercise: [

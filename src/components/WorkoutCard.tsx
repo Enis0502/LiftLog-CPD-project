@@ -2,7 +2,9 @@ import { View, Text, Image, Pressable } from "react-native";
 import { opacity } from "react-native-reanimated/lib/typescript/Colors";
 import { styles } from "@/style/styles";
 
-export default function WorkoutCard() {
+//type Props = { workout: Workout; onPress?: () => void };
+
+export default function WorkoutCard( {workout}: {workout: string}) {
   return (
     <Pressable
       onPress={() => {
@@ -18,7 +20,7 @@ export default function WorkoutCard() {
           marginLeft: 16,
         }}
       >
-        <Text style={styles.t3}>Workout title</Text>
+        <Text style={styles.t3}>{workout}</Text>
         <Text style={[styles.secondary, { marginTop: 8 }]}>Date</Text>
         <View
           style={{
