@@ -1,8 +1,12 @@
+import { Colors } from "@/constants/theme";
 import { StyleSheet } from "react-native";
+
+const dark = Colors.dark;
+const light = Colors.light;
 
 export const styles = StyleSheet.create({
   card: {
-    backgroundColor: "#20231f",
+    backgroundColor: dark.cardBackground,
     flexDirection: "row",
     padding: 16,
     borderRadius: 15,
@@ -28,7 +32,7 @@ export const styles = StyleSheet.create({
     fontSize: 40,
     fontWeight: "bold",
   },
-  t2:{
+  t2: {
     color: "#f6f7f4",
     fontSize: 26,
     fontWeight: "bold",
@@ -40,7 +44,7 @@ export const styles = StyleSheet.create({
   },
   background: {
     backgroundColor: "#2b342b",
-    padding:16,
+    padding: 16,
     width: "100%",
     height: "100%",
   },

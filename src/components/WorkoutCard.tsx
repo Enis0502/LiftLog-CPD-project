@@ -1,12 +1,11 @@
-import { View, Text, Image, Pressable } from "react-native";
-import { opacity } from "react-native-reanimated/lib/typescript/Colors";
 import { styles } from "@/style/styles";
+import { Image, Pressable, Text, View } from "react-native";
 
 //type Props = { workout: Workout; onPress?: () => void };
 
-export default function WorkoutCard( {workout}: {workout: string}) {
+export default function WorkoutCard({ workout }: { workout: string }) {
   return (
-    <Pressable
+    <Pressable  
       onPress={() => {
         console.log("Card pressed");
       }}
