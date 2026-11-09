@@ -1,7 +1,7 @@
 export const Colors = {
   light: {
-    cardBackground: "#ffffff",
-    background: "#f1f4ee",
+    cardBackground: "#d6d6d6",
+    background: "#f9fff2",
 
     text: {
       primary: "#1b1f1a",

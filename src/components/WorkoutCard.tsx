@@ -1,15 +1,20 @@
+import { useTheme } from "@/hooks/useTheme";
 import { styles } from "@/style/styles";
 import { Image, Pressable, Text, View } from "react-native";
 
 //type Props = { workout: Workout; onPress?: () => void };
 
 export default function WorkoutCard({ workout }: { workout: string }) {
+  const theme = useTheme();
   return (
-    <Pressable  
+    <Pressable
       onPress={() => {
         console.log("Card pressed");
       }}
-      style={({ pressed }) => [styles.card, { opacity: pressed ? 0.6 : 1.0 }]}
+      style={({ pressed }) => [
+        styles.card,
+        { opacity: pressed ? 0.6 : 1.0, backgroundColor: theme.cardBackground },
+      ]}
     >
       <Image style={styles.logo} source={require("@/assets/images/logo.png")} />
 
@@ -19,19 +24,23 @@ export default function WorkoutCard({ workout }: { workout: string }) {
           marginLeft: 16,
         }}
       >
-        <Text style={styles.t3}>{workout}</Text>
-        <Text style={[styles.secondary, { marginTop: 8 }]}>Date</Text>
+        <Text style={[styles.t3, { color: theme.text.primary }]}>
+          {workout}
+        </Text>
+        <Text style={{ marginTop: 8, color: theme.text.secondary }}>Date</Text>
         <View
           style={{
             flexDirection: "row",
             marginTop: 16,
           }}
         >
-          <Text style={[styles.secondary, { marginRight: 16 }]}>
-            Total excercise
+          <Text style={{ marginRight: 16, color: theme.text.secondary }}>
+            Total excercises
           </Text>
-          <Text style={[styles.secondary, { marginRight: 16 }]}>1000 kg</Text>
-          <Text style={[styles.secondary, { marginRight: 16 }]}>
+          <Text style={{ marginRight: 16, color: theme.text.secondary }}>
+            1000 kg
+          </Text>
+          <Text style={{ marginRight: 16, color: theme.text.secondary }}>
             Duration:{" "}
           </Text>
         </View>
