@@ -1,10 +1,10 @@
-import { Exercise, Workout } from "@/types";
+import { Workout } from "@/types";
 
 export const workouts: Workout[] = [
   {
     id: 1,
     name: "Upper body",
-    duration: 3600,
+    duration: 3645,
     exercise: [
       {
         id: 1,
@@ -33,12 +33,21 @@ export const workouts: Workout[] = [
           { reps: 10, weight: 50 },
         ],
       },
+      {
+        id: 4,
+        name: "Pec dec fly",
+        sets: [
+          { reps: 10, weight: 80 },
+          { reps: 9, weight: 80 },
+          { reps: 10, weight: 70 },
+        ],
+      },
     ],
   },
   {
     id: 2,
     name: "Legs",
-    duration: 3600,
+    duration: 2509,
     exercise: [
       {
         id: 1,
@@ -60,6 +69,24 @@ export const workouts: Workout[] = [
       },
       {
         id: 3,
+        name: "Calf raises",
+        sets: [
+          { reps: 10, weight: 70 },
+          { reps: 9, weight: 70 },
+          { reps: 10, weight: 50 },
+        ],
+      },
+      {
+        id: 4,
+        name: "Calf raises",
+        sets: [
+          { reps: 10, weight: 70 },
+          { reps: 9, weight: 70 },
+          { reps: 10, weight: 50 },
+        ],
+      },
+      {
+        id: 5,
         name: "Calf raises",
         sets: [
           { reps: 10, weight: 70 },
@@ -140,6 +167,40 @@ export const workouts: Workout[] = [
   {
     id: 5,
     name: "Shoulder day",
+    duration: 3600,
+    exercise: [
+      {
+        id: 1,
+        name: "Lat raises",
+        sets: [
+          { reps: 10, weight: 80 },
+          { reps: 9, weight: 80 },
+          { reps: 10, weight: 70 },
+        ],
+      },
+      {
+        id: 2,
+        name: "Arnold press",
+        sets: [
+          { reps: 10, weight: 40 },
+          { reps: 9, weight: 40 },
+          { reps: 10, weight: 30 },
+        ],
+      },
+      {
+        id: 3,
+        name: "Military press",
+        sets: [
+          { reps: 10, weight: 70 },
+          { reps: 9, weight: 70 },
+          { reps: 10, weight: 50 },
+        ],
+      },
+    ],
+  },
+  {
+    id: 6,
+    name: "Arm day",
     duration: 3600,
     exercise: [
       {

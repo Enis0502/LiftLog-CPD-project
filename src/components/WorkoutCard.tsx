@@ -1,10 +1,13 @@
 import { useTheme } from "@/hooks/useTheme";
 import { styles } from "@/style/styles";
+import { Workout } from "@/types";
+import formatDuration from "@/utils/formatDuration";
+import { workoutVolume } from "@/utils/workoutVolume";
 import { Image, Pressable, Text, View } from "react-native";
 
 //type Props = { workout: Workout; onPress?: () => void };
 
-export default function WorkoutCard({ workout }: { workout: string }) {
+export default function WorkoutCard({ workout }: { workout: Workout }) {
   const theme = useTheme();
   return (
     <Pressable
@@ -25,23 +28,29 @@ export default function WorkoutCard({ workout }: { workout: string }) {
         }}
       >
         <Text style={[styles.t3, { color: theme.text.primary }]}>
-          {workout}
+          {workout.name}
         </Text>
         <Text style={{ marginTop: 8, color: theme.text.secondary }}>Date</Text>
         <View
           style={{
             flexDirection: "row",
+            flexWrap: "wrap",
+            columnGap: 16,
+            rowGap: 8,
             marginTop: 16,
           }}
         >
           <Text style={{ marginRight: 16, color: theme.text.secondary }}>
-            Total excercises
+            Excercises:
+            <Text style={{ color: theme.text.highlight }}>
+              {workout.exercise.length}
+            </Text>
           </Text>
           <Text style={{ marginRight: 16, color: theme.text.secondary }}>
-            1000 kg
+            {workoutVolume(workout)} kg
           </Text>
           <Text style={{ marginRight: 16, color: theme.text.secondary }}>
-            Duration:{" "}
+            Duration:{formatDuration(workout.duration)}
           </Text>
         </View>
       </View>

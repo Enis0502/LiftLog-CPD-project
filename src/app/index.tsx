@@ -30,7 +30,7 @@ export default function Index() {
               color: theme.text.highlight,
             }}
           >
-            5
+            {workouts.length}
           </Text>
           <Text style={{ color: theme.text.secondary }}>This week</Text>
         </View>
@@ -84,7 +84,7 @@ export default function Index() {
 
       <View style={{ gap: 16 }}>
         {workouts.map((w) => (
-          <WorkoutCard key={w.id} workout={w.name}></WorkoutCard>
+          <WorkoutCard key={w.id} workout={w} />
         ))}
       </View>
     </ScrollView>
