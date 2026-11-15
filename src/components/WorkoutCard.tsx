@@ -3,11 +3,12 @@ import { styles } from "@/style/styles";
 import { Workout } from "@/types";
 import formatDuration from "@/utils/formatDuration";
 import { workoutVolume } from "@/utils/workoutVolume";
-import { Image, Pressable, Text, View } from "react-native";
+import { Image, Pressable, StyleProp, Text, View, ViewStyle } from "react-native";
 
 //type Props = { workout: Workout; onPress?: () => void };
 
-export default function WorkoutCard({ workout }: { workout: Workout }) {
+type Props = { workout: Workout; style?: StyleProp<ViewStyle> };
+export default function WorkoutCard({ workout, style }: Props ) {
   const theme = useTheme();
   return (
     <Pressable
@@ -23,6 +24,7 @@ export default function WorkoutCard({ workout }: { workout: Workout }) {
 
       <View
         style={{
+          
           flexDirection: "column",
           marginLeft: 16,
         }}
