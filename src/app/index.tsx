@@ -1,9 +1,20 @@
+import EmptyState from "@/components/EmptyState";
+import ErrorState from "@/components/ErrorState";
 import WorkoutCard from "@/components/WorkoutCard";
 import { FontSize, Spacing } from "@/constants/theme";
-import { workouts } from "@/data/workouts";
+import { fetchWorkouts } from "@/data/api";
 import { useTheme } from "@/hooks/useTheme";
 import { styles } from "@/style/styles";
-import { FlatList, Image, Text, useWindowDimensions, View } from "react-native";
+import { Workout } from "@/types";
+import { useEffect, useState } from "react";
+import {
+  ActivityIndicator,
+  FlatList,
+  Image,
+  Text,
+  useWindowDimensions,
+  View,
+} from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 export default function Index() {
@@ -14,6 +25,45 @@ export default function Index() {
 
   const insets = useSafeAreaInsets();
   const theme = useTheme();
+
+  const [workouts, setWorkouts] = useState<Workout[]>([]);
+  const [status, setStatus] = useState<"loading" | "ready" | "error">(
+    "loading",
+  );
+  const [attempt, setAttempt] = useState(0);
+
+  useEffect(() => {
+    let ignore = false;
+
+    fetchWorkouts({fail: attempt < 1})
+      .then((data) => {
+        if (!ignore) {
+          setWorkouts(data);
+          setStatus("ready");
+        }
+      })
+      .catch(() => {
+        if (!ignore) {
+          setStatus("error");
+        }
+      })
+
+    return () => {
+      ignore = true;
+    };
+  }, [attempt]);
+
+  function retry(){
+    setStatus("loading");
+    setAttempt((a) => a + 1);
+  }
+
+  if (status === "loading")
+    return <ActivityIndicator style={{ flex: 1 }}></ActivityIndicator>;
+
+  if (status === "error")
+     return <ErrorState onRetry={retry}/> ;
+
   return (
     <FlatList
       data={workouts}
@@ -21,12 +71,17 @@ export default function Index() {
       key={columns}
       numColumns={columns}
       columnWrapperStyle={columns > 1 ? { gap: Spacing.md } : undefined}
-      renderItem={({ item }) => (
-        <WorkoutCard workout={item} style={{ flex: 1 }} />
-      )}
+      renderItem={({ item }) => <WorkoutCard workout={item} />}
+      ListEmptyComponent={
+        <EmptyState
+          title="No workouts yet!"
+          message="Your workouts will appear here. Motivate yourself!"
+        />
+      }
       contentContainerStyle={{
         padding: Spacing.md,
         paddingBottom: Spacing.md + insets.bottom,
+        flexGrow: 1,
       }}
       ItemSeparatorComponent={() => (
         <View style={{ height: Spacing.md }}></View>

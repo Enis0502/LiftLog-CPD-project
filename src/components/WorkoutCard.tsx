@@ -43,7 +43,7 @@ export default function WorkoutCard({ workout, style }: Props ) {
           }}
         >
           <Text style={{ marginRight: 16, color: theme.text.secondary }}>
-            Excercises:
+            Excercises:{" "}
             <Text style={{ color: theme.text.highlight }}>
               {workout.exercise.length}
             </Text>

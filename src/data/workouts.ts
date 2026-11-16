@@ -1,5 +1,7 @@
 import { Workout } from "@/types";
 
+export const workouts2: Workout[] = [];
+
 export const workouts: Workout[] = [
   {
     id: 1,
