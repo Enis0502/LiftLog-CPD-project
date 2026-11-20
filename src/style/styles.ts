@@ -30,7 +30,7 @@ export const styles = StyleSheet.create({
   },
 
   box: {
-    flexWrap:"wrap",
+    flexWrap: "wrap",
     justifyContent: "center",
     alignItems: "center",
     marginTop: Spacing.lg,
@@ -42,8 +42,17 @@ export const styles = StyleSheet.create({
     height: 50,
     borderRadius: 10,
     justifyContent: "center",
-    alignItems: "center"
-  }
+    alignItems: "center",
+  },
+
+  filterButtons: {
+    width: 100,
+    height: 50,
+    borderRadius: 10,
+    justifyContent: "center",
+    alignItems: "center",
+    gap: Spacing.md
+  },
   //#f6f7f4 text color primary
   //#7e847c text color secondary
   //#d7ff54 lime

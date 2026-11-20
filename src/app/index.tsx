@@ -1,5 +1,6 @@
 import EmptyState from "@/components/EmptyState";
 import ErrorState from "@/components/ErrorState";
+import FilterCard from "@/components/FilterCard";
 import WorkoutCard from "@/components/WorkoutCard";
 import { FontSize, Spacing } from "@/constants/theme";
 import { fetchWorkouts } from "@/data/api";
@@ -30,12 +31,27 @@ export default function Index() {
   const [status, setStatus] = useState<"loading" | "ready" | "error">(
     "loading",
   );
-  const [attempt, setAttempt] = useState(0);
 
+  const FILTERS = ["All", "Short", "Medium", "Long"] as const;
+  type Filter = (typeof FILTERS)[number];
+  const [filter, setFilter] = useState<Filter>("All");
+  const [attempt, setAttempt] = useState(0);
+  const [refreshing, setRefreshing] = useState(false);
+
+  async function refresh() {
+    setRefreshing(true);
+    try {
+      setWorkouts(await fetchWorkouts({ fail: attempt < 2 }));
+    } catch {
+      <Text>refreshingggg...</Text>;
+    } finally {
+      setRefreshing(false);
+    }
+  }
   useEffect(() => {
     let ignore = false;
 
-    fetchWorkouts({fail: attempt < 1})
+    fetchWorkouts({ fail: attempt < 1 })
       .then((data) => {
         if (!ignore) {
           setWorkouts(data);
@@ -46,14 +62,18 @@ export default function Index() {
         if (!ignore) {
           setStatus("error");
         }
-      })
+      });
 
     return () => {
       ignore = true;
     };
   }, [attempt]);
 
-  function retry(){
+  useEffect(() => {
+    fetchWorkouts()
+  }, [filter])
+
+  function retry() {
     setStatus("loading");
     setAttempt((a) => a + 1);
   }
@@ -61,8 +81,7 @@ export default function Index() {
   if (status === "loading")
     return <ActivityIndicator style={{ flex: 1 }}></ActivityIndicator>;
 
-  if (status === "error")
-     return <ErrorState onRetry={retry}/> ;
+  if (status === "error") return <ErrorState onRetry={retry} />;
 
   return (
     <FlatList
@@ -78,6 +97,8 @@ export default function Index() {
           message="Your workouts will appear here. Motivate yourself!"
         />
       }
+      refreshing={refreshing}
+      onRefresh={refresh}
       contentContainerStyle={{
         padding: Spacing.md,
         paddingBottom: Spacing.md + insets.bottom,
@@ -158,6 +179,17 @@ export default function Index() {
               Recent sessions
             </Text>
             <Text style={{ color: theme.text.secondary }}>June</Text>
+          </View>
+          <View
+            style={{
+              flexDirection: "row",
+              gap: Spacing.md,
+              marginBottom: Spacing.lg,
+            }}
+          >
+            {/* {FILTERS.map((f) => (
+              <FilterCard key={f} title={f} workouts={}/>
+            ))} */}
           </View>
         </View>
       )}
