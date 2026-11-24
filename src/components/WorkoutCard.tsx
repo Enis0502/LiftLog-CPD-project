@@ -7,14 +7,12 @@ import { Image, Pressable, StyleProp, Text, View, ViewStyle } from "react-native
 
 //type Props = { workout: Workout; onPress?: () => void };
 
-type Props = { workout: Workout; style?: StyleProp<ViewStyle> };
-export default function WorkoutCard({ workout, style }: Props ) {
+type Props = { workout: Workout; style?: StyleProp<ViewStyle>; onPress: () => void};
+export default function WorkoutCard({ workout, style, onPress }: Props ) {
   const theme = useTheme();
   return (
     <Pressable
-      onPress={() => {
-        console.log("Card pressed");
-      }}
+      onPress={onPress}
       style={({ pressed }) => [
         styles.card,
         { opacity: pressed ? 0.6 : 1.0, backgroundColor: theme.cardBackground },

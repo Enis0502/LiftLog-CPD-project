@@ -10,3 +10,7 @@ export async function fetchWorkouts(
   if (options.fail) throw new Error("Could not load workouts");
   return workouts;
 }
+
+export function getWorkout(id: string): Workout | undefined {
+  return workouts.find((w) => String(w.id) === id);
+}

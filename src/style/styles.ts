@@ -51,7 +51,14 @@ export const styles = StyleSheet.create({
     borderRadius: 10,
     justifyContent: "center",
     alignItems: "center",
-    gap: Spacing.md
+    gap: Spacing.md,
+  },
+
+  workoutDetailsCard: {
+    flex: 1,
+    flexShrink: 1,
+    borderRadius: 15,
+    padding: Spacing.md,
   },
   //#f6f7f4 text color primary
   //#7e847c text color secondary

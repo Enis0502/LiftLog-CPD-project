@@ -1,12 +1,12 @@
 import EmptyState from "@/components/EmptyState";
 import ErrorState from "@/components/ErrorState";
-import FilterCard from "@/components/FilterCard";
 import WorkoutCard from "@/components/WorkoutCard";
 import { FontSize, Spacing } from "@/constants/theme";
 import { fetchWorkouts } from "@/data/api";
 import { useTheme } from "@/hooks/useTheme";
 import { styles } from "@/style/styles";
 import { Workout } from "@/types";
+import { useRouter } from "expo-router";
 import { useEffect, useState } from "react";
 import {
   ActivityIndicator,
@@ -37,7 +37,7 @@ export default function Index() {
   const [filter, setFilter] = useState<Filter>("All");
   const [attempt, setAttempt] = useState(0);
   const [refreshing, setRefreshing] = useState(false);
-
+  const router = useRouter();
   async function refresh() {
     setRefreshing(true);
     try {
@@ -70,8 +70,8 @@ export default function Index() {
   }, [attempt]);
 
   useEffect(() => {
-    fetchWorkouts()
-  }, [filter])
+    fetchWorkouts();
+  }, [filter]);
 
   function retry() {
     setStatus("loading");
@@ -90,7 +90,13 @@ export default function Index() {
       key={columns}
       numColumns={columns}
       columnWrapperStyle={columns > 1 ? { gap: Spacing.md } : undefined}
-      renderItem={({ item }) => <WorkoutCard workout={item} />}
+      renderItem={({ item }) => (
+        <WorkoutCard
+          workout={item}
+          onPress={() => router.push(`/workout/${item.id}`)}
+          //onLongPress needs to be added
+        />
+      )}
       ListEmptyComponent={
         <EmptyState
           title="No workouts yet!"

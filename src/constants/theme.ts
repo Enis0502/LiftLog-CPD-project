@@ -2,6 +2,7 @@ export const Colors = {
   light: {
     cardBackground: "#d6d6d6",
     background: "#f9fff2",
+    buttonSecondary: "#e8f0df",
 
     text: {
       primary: "#1b1f1a",
@@ -12,6 +13,7 @@ export const Colors = {
   dark: {
     cardBackground: "#20231f",
     background: "#2b342b",
+    buttonSecondary: "#719965",
 
     text: {
       primary: "#f6f7f4",
