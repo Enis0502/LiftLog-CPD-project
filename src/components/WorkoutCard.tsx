@@ -3,26 +3,51 @@ import { styles } from "@/style/styles";
 import { Workout } from "@/types";
 import formatDuration from "@/utils/formatDuration";
 import { workoutVolume } from "@/utils/workoutVolume";
-import { Image, Pressable, StyleProp, Text, View, ViewStyle } from "react-native";
+import {
+  Image,
+  Pressable,
+  StyleProp,
+  Text,
+  View,
+  ViewStyle,
+} from "react-native";
 
 //type Props = { workout: Workout; onPress?: () => void };
 
-type Props = { workout: Workout; style?: StyleProp<ViewStyle>; onPress: () => void};
-export default function WorkoutCard({ workout, style, onPress }: Props ) {
+type Props = {
+  workout: Workout;
+  style?: StyleProp<ViewStyle>;
+  onPress: () => void;
+  onLongPress: () => void;
+};
+export default function WorkoutCard({
+  workout,
+  style,
+  onPress,
+  onLongPress,
+}: Props) {
   const theme = useTheme();
   return (
     <Pressable
       onPress={onPress}
+      onLongPress={onLongPress}
+      //used by the screen readers 
+      accessibilityRole="button"
+      accessibilityLabel={`${workout.name}, ${workout.exercise.length} exercises, ${workoutVolume(workout)} kilograms, ${formatDuration(workout.duration)}`}
+      accessibilityHint="Opens the workout. Long press to delete."
+      android_ripple={{ color: theme.text.secondary }}
+      //
       style={({ pressed }) => [
         styles.card,
         { opacity: pressed ? 0.6 : 1.0, backgroundColor: theme.cardBackground },
+        ,
+        style,
       ]}
     >
       <Image style={styles.logo} source={require("@/assets/images/logo.png")} />
 
       <View
         style={{
-          
           flexDirection: "column",
           marginLeft: 16,
         }}

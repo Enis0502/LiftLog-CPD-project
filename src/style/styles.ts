@@ -30,7 +30,7 @@ export const styles = StyleSheet.create({
   },
 
   box: {
-    flexWrap: "wrap",
+    flex: 1,
     justifyContent: "center",
     alignItems: "center",
     marginTop: Spacing.lg,

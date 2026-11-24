@@ -6,6 +6,7 @@ import { fetchWorkouts } from "@/data/api";
 import { useTheme } from "@/hooks/useTheme";
 import { styles } from "@/style/styles";
 import { Workout } from "@/types";
+import confirmDelete from "@/utils/confirmDelete";
 import { useRouter } from "expo-router";
 import { useEffect, useState } from "react";
 import {
@@ -28,6 +29,7 @@ export default function Index() {
   const theme = useTheme();
 
   const [workouts, setWorkouts] = useState<Workout[]>([]);
+
   const [status, setStatus] = useState<"loading" | "ready" | "error">(
     "loading",
   );
@@ -92,9 +94,10 @@ export default function Index() {
       columnWrapperStyle={columns > 1 ? { gap: Spacing.md } : undefined}
       renderItem={({ item }) => (
         <WorkoutCard
+          style={{ width: cardWidth }}
           workout={item}
           onPress={() => router.push(`/workout/${item.id}`)}
-          //onLongPress needs to be added
+          onLongPress={() => confirmDelete({ workout: item, setWorkouts })}
         />
       )}
       ListEmptyComponent={
